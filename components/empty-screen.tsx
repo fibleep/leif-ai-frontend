@@ -28,7 +28,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    let watchId;
+    let watchId: number;
 
     if ('geolocation' in navigator) {
       watchId = navigator.geolocation.watchPosition(
