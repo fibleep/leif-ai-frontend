@@ -58,7 +58,11 @@ export function ChatPanel({
   const onError = (error:any) => {
     setLocation({
       loaded: true,
-      error,
+      coordinates: {
+        lat: '99.999',
+        lng: '0.000',
+        alt: '0',
+      },
     });
   };
 
