@@ -4,18 +4,16 @@ import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
 import { FooterText } from '@/components/footer'
 import { PromptForm } from '@/components/prompt-form'
 import { Button } from '@/components/ui/button'
-import { IconRefresh, IconStop } from '@/components/ui/icons'
-import { useEffect, useState } from 'react'
-import Message from '@/models/message'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTitle
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
+import { IconRefresh, IconStop } from '@/components/ui/icons'
+import Message from '@/models/message'
+import { useState } from 'react'
 export interface ChatPanelProps
   extends Pick<
     UseChatHelpers,
