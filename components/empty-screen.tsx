@@ -1,8 +1,7 @@
-import { UseChatHelpers } from 'ai/react'
-
-import { Button } from '@/components/ui/button'
-import { IconArrowRight } from '@/components/ui/icons'
-import { useEffect, useState } from 'react'
+import { UseChatHelpers } from 'ai/react';
+import { Button } from '@/components/ui/button';
+import { IconArrowRight } from '@/components/ui/icons';
+import { useEffect, useState } from 'react';
 
 const exampleMessages = [
   {
@@ -17,15 +16,17 @@ const exampleMessages = [
     heading: 'Who are you?',
     message: `Who are you?`
   }
-]
+];
+
+type Location = {
+  latitude: number | null;
+  longitude: number | null;
+  altitude: number | null;
+}
 
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
-   const [location, setLocation] = useState({ 
-    latitude: null, 
-    longitude: null, 
-    altitude: null 
-  });
-  const [error, setError] = useState('');
+  const [location, setLocation] = useState<Location>({ latitude: null, longitude: null, altitude: null });
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     let watchId: number;
