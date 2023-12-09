@@ -17,9 +17,32 @@ const points: Point[] = [
   { lat: 51.22065269192940, lng: 4.409998604378598, alt: 52, acc:1, label: 'Point 5' },
 ];
 
+const compassDirections = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N'];
+
+
 const MapView: FC = () => {
   const [initialPosition, setInitialPosition] = useState<Point>({ lat: 0, lng: 0, alt: 0, acc:100, label: 'You' });
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [direction, setDirection] = useState<string>('');
+
+  const convertAlphaToDirection = (alpha: number) => {
+    const index = Math.round(alpha / 45);
+    return compassDirections[index];
+  };
+
+  useEffect(() => {
+    const handleOrientation = (event: DeviceOrientationEvent) => {
+      const { alpha } = event;
+      if (alpha !== null) {
+        setDirection(convertAlphaToDirection(alpha));
+      }
+    };
+
+    window.addEventListener('deviceorientation', handleOrientation, true);
+    return () => {
+      window.removeEventListener('deviceorientation', handleOrientation, true);
+    };
+  }, []);
 
   const drawMap = useCallback(() => {
     const canvas = canvasRef.current;
@@ -118,7 +141,8 @@ const MapView: FC = () => {
       <span>Latitude: {initialPosition.lat}</span>
       <span>Longitude: {initialPosition.lng}</span>
           <span>Altitude: {initialPosition.alt}</span>
-            <span>Accuracy: {initialPosition.acc}</span>
+          <span>Accuracy: {initialPosition.acc}</span>
+            <span>Direction: {direction}</span>
     </div>
   );
 };
