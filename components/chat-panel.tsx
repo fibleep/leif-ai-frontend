@@ -40,7 +40,7 @@ export function ChatPanel({
 }: ChatPanelProps) {
   const [location, setLocation] = useState({
     loaded: false,
-    coordinates: { lat: 0, lng: 0, alt: 0 },
+    coordinates: { lat: '0', lng: '0', alt: '0' },
   });
 
   const onSuccess = (location:any) => {
@@ -59,9 +59,9 @@ export function ChatPanel({
     setLocation({
       loaded: true,
       coordinates: {
-        lat: 99.999,
-        lng: 0.000,
-        alt: 0,
+        lat: '99.999',
+        lng: '0.000',
+        alt: '0',
       },
     });
   };
