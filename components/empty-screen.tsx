@@ -26,33 +26,6 @@ type Location = {
 }
 
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
-  const [location, setLocation] = useState<Location>({ latitude: null, longitude: null, altitude: null });
-  const [error, setError] = useState<string>('');
-
-  useEffect(() => {
-    let watchId: number;
-
-    if ('geolocation' in navigator) {
-      watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            altitude: position.coords.altitude
-          });
-        },
-        (error) => {
-          setError(error.message);
-        }
-      );
-    } else {
-      setError('Geolocation is not supported by your browser.');
-    }
-
-    return () => {
-      if (watchId) navigator.geolocation.clearWatch(watchId);
-    };
-  }, []);
   
   return (
     <div className="mx-auto max-w-2xl px-4">

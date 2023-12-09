@@ -3,21 +3,22 @@ import { FC, useEffect, useRef, useState, useCallback } from 'react';
 type Point = {
   lat: number;
   lng: number;
-  alt: number;
+alt: number;
+  acc: number;
   label: string;
 };
 
 const points: Point[] = [
-  { lat: 51.22075269192945, lng: 4.409898604878598, alt: 52, label: 'Point 0' },
-  { lat: 51.22085269192944, lng: 4.409998604778598, alt: 52, label: 'Point 1' },
-  { lat: 51.22065269192943, lng: 4.409798604678598, alt: 52, label: 'Point 2' },
-  { lat: 51.22075269192942, lng: 4.410098604578598, alt: 52, label: 'Point 3' },
-  { lat: 51.22085269192941, lng: 4.409798604478598, alt: 52, label: 'Point 4' },
-  { lat: 51.22065269192940, lng: 4.409998604378598, alt: 52, label: 'Point 5' },
+  { lat: 51.22075269192945, lng: 4.409898604878598, alt: 52, acc:1, label: 'Point 0' },
+  { lat: 51.22085269192944, lng: 4.409998604778598, alt: 52, acc:1, label: 'Point 1' },
+  { lat: 51.22065269192943, lng: 4.409798604678598, alt: 52, acc:1, label: 'Point 2' },
+  { lat: 51.22075269192942, lng: 4.410098604578598, alt: 52, acc:1, label: 'Point 3' },
+  { lat: 51.22085269192941, lng: 4.409798604478598, alt: 52, acc:1, label: 'Point 4' },
+  { lat: 51.22065269192940, lng: 4.409998604378598, alt: 52, acc:1, label: 'Point 5' },
 ];
 
 const MapView: FC = () => {
-  const [initialPosition, setInitialPosition] = useState<Point>({ lat: 0, lng: 0, alt: 0, label: 'You' });
+  const [initialPosition, setInitialPosition] = useState<Point>({ lat: 0, lng: 0, alt: 0, acc:100, label: 'You' });
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const drawMap = useCallback(() => {
@@ -74,7 +75,8 @@ const MapView: FC = () => {
         setInitialPosition({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
-        alt: position.coords.altitude || 0,
+            alt: position.coords.altitude || 0,
+        acc: position.coords.accuracy,
         label: 'You'
         });
   };
@@ -115,7 +117,8 @@ const MapView: FC = () => {
               ref={canvasRef} width={400} height={400}></canvas>
       <span>Latitude: {initialPosition.lat}</span>
       <span>Longitude: {initialPosition.lng}</span>
-      <span>Altitude: {initialPosition.alt}</span>
+          <span>Altitude: {initialPosition.alt}</span>
+            <span>Accuracy: {initialPosition.acc}</span>
     </div>
   );
 };
