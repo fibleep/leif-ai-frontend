@@ -2,6 +2,7 @@ import { UseChatHelpers } from 'ai/react';
 import { Button } from '@/components/ui/button';
 import { IconArrowRight } from '@/components/ui/icons';
 import { useEffect, useState } from 'react';
+import MapView from '@/components/map';
 
 const exampleMessages = [
   {
@@ -78,10 +79,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             </Button>
           ))}
           <p className="text-sm text-muted-foreground">
-            Latitude: {location.latitude} <br/>
-            Longitude: {location.longitude} <br/>
-            {location.altitude !== null ? `Altitude: ${location.altitude} meters` : ''}
-
+            <MapView/>
           </p>
         </div>
       </div>
